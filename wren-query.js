@@ -140,9 +140,9 @@ function kii_init(obj)
   }
   var attr = ['serverURL', 'app_id', 'app_key', 'thing_id', 'thing_token',
       'bucket_id'];
-  for (var a in attr) { 
-    if (!obj.kii.hasOwnProperty(a) || !obj.kii['a']) {
-      console.log("ERROR: wrenObj.kii.%s is not defined, or null.", a);
+  for (var i; i < attr.length; i++) {
+    if (!obj.kii.hasOwnProperty(attr[i]) || !obj.kii[attr[i]]) {
+      console.log("ERROR: wrenObj.kii.%s is not defined, or null.", attr[i]);
     }
   }
   /* set query_function */
