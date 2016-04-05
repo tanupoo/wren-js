@@ -247,8 +247,8 @@ function update_canvas()
 
 /*
  * update the dataset, _wrenDataSet.
- * @param obj a list of points in json.
- * @param obj index of the target in dataDef.
+ * @param res a list of points in json.
+ * @param i index of the target in dataDef.
  * XXX this function needs to be reviewd..
  */
 function wren_update_dataset(res, i)
