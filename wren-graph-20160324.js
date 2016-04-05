@@ -32,12 +32,12 @@ var _wrenEvTimeout = null;
 function wren_init()
 {
   if (typeof(wrenObj) == 'undefined') {
-    alert('ERROR: wrenObj must be defined.');
+    console.log('ERROR: wrenObj must be defined.');
   }
 
   /* check whether type exists */
   if (typeof(wrenObj.type) == 'undefined') {
-    alert('ERROR: wrenObj.type must be defined.');
+    console.log('ERROR: wrenObj.type must be defined.');
   }
 
   /* check type and set query function */
@@ -49,7 +49,7 @@ function wren_init()
   } else if (wrenObj.type == 'kii') {
     kii_init(wrenObj);
   } else {
-    alert('ERROR: wrenObj.type must be defined or be kiwi, fiap, or kii.');
+    console.log('ERROR: wrenObj.type must be either kiwi, fiap, or kii.');
   }
 
   // once it gets multiple data, it will get one data from next time.

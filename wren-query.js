@@ -82,7 +82,7 @@ function fiap_init(obj)
 {
   /* check required attributes */
   if (!obj.hasOwnProperty('fiap')) {
-    alert("ERROR: wrenObj.fiap is not defined.");
+    console.log("ERROR: wrenObj.fiap is not defined.");
   }
   /* set query_function */
   obj.query_function = fiap_send_query;
@@ -106,7 +106,7 @@ function fiap_init(obj)
  */
 function fiap_send_query(obj, cb, cb_error)
 {
-  alert("FATAL: fiap_send_query() is not supported yet.");
+  console.log("FATAL: fiap_send_query() is not supported yet.");
   //s = update_query_fiap(obj);
   $.ajaxSetup({ cache: false });
   $.ajax({
