@@ -44,15 +44,13 @@ function wren_init()
   }
 
   /* check type and set query function */
+  // XXX here, should call init function according to the type.
   if (wrenObj.type == 'kiwi') {
-    wrenObj.query_function = send_query_kiwi;
+    kiwi_init(wrenObj);
   } else if (wrenObj.type == 'fiap') {
-    wrenObj.query_function = send_query_fiap;
+    fiap_init(wrenObj);
   } else if (wrenObj.type == 'kii') {
-    if (!wrenObj.hasOwnProperty('kii')) {
-      alert('ERROR: wrenObj.kii must be defined in the type of kii.');
-    }
-    wrenObj.query_function = send_query_kii;
+    kii_init(wrenObj);
   } else {
     alert('ERROR: wrenObj.type must be defined or be kiwi, fiap, or kii.');
   }
