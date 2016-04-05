@@ -36,7 +36,7 @@ function kiwi_init(obj)
  * @param obj wrenObj
  * @return URL and query data.
  */
-function update_query_kiwi(obj)
+function kiwi_update_query(obj)
 {
   var server_url = "";
   for (var i = 0; i < obj.dataDef.length; i++) {
@@ -61,7 +61,7 @@ function update_query_kiwi(obj)
  */
 function kiwi_send_query(obj, cb, cb_error)
 {
-  s = update_query_kiwi(obj);
+  s = kiwi_update_query(obj);
   $.ajaxSetup({ cache: false });
   $.ajax({
     url: s.server_url,
@@ -85,7 +85,7 @@ function fiap_init(obj)
     alert("ERROR: wrenObj.fiap is not defined.");
   }
   /* set query_function */
-  obj.query_function = send_query_fiap;
+  obj.query_function = fiap_send_query;
   /* set baseURI */
   if (!obj.fiap.hasOwnProperty('serverURL') || obj.fiap.serverURL) {
     obj.baseURI = obj.fiap.serverURL;
@@ -104,9 +104,9 @@ function fiap_init(obj)
  * @param cb callback if succeeded.
  * @param cb_error callback if failed.
  */
-function send_query_fiap(obj, cb, cb_error)
+function fiap_send_query(obj, cb, cb_error)
 {
-  alert("FATAL: send_query_fiap() is not supported yet.");
+  alert("FATAL: fiap_send_query() is not supported yet.");
   //s = update_query_fiap(obj);
   $.ajaxSetup({ cache: false });
   $.ajax({
@@ -146,7 +146,7 @@ function kii_init(obj)
     }
   }
   /* set query_function */
-  obj.query_function = send_query_kii;
+  obj.query_function = kii_send_query;
   /* set baseURI */
   obj.baseURI = obj.kii.serverURL + "/" + obj.kii.app_id + "/things/" +
       obj.kii.thing_id + "/buckets/" + obj.kii.bucket_id + "/query";
@@ -157,7 +157,7 @@ function kii_init(obj)
  * @param obj wrenObj
  * @return URL and query data.
  */
-function update_query_kii(obj)
+function kii_update_query(obj)
 {
   var date = new Date();
   var unixtime = date.getTime();
@@ -192,9 +192,9 @@ function update_query_kii(obj)
  * @param cb callback if succeeded.
  * @param cb_error callback if failed.
  */
-function send_query_kii(obj, cb, cb_error)
+function kii_send_query(obj, cb, cb_error)
 {
-  s = update_query_kii(obj);
+  s = kii_update_query(obj);
   $.ajaxSetup({ cache: false });
   $.ajax({
     url: s.server_url,
