@@ -58,3 +58,7 @@ wren-js
         default is 172800000 (2 days).
     ~~~~
 
+## test for wren-parse-object.js
+
+the files in the test directory can be used to check the parser with node.js.
+comment out some lines in wren-parse-object.js.
