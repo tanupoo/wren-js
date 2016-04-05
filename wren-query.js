@@ -1,5 +1,9 @@
-
 /*
+ * Copyright (C) 2010 Shoichi Sakane <sakane@tanu.org>, All rights reserved.
+ * See the file LICENSE in the top level directory for more details.
+ */
+
+/*****
  * for kiwi server.
  */
 
@@ -51,7 +55,7 @@ function send_query_kiwi(obj, cb, cb_error)
   });
 }
 
-/*
+/*****
  * for fiap server.
  */
 
@@ -81,7 +85,7 @@ function send_query_fiap(obj, cb, cb_error)
   });
 }
 
-/*
+/*****
  * for KiiCloud.
  */
 
