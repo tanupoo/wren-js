@@ -1,0 +1,48 @@
+{
+  "queryDescription": "",
+  "results":
+[
+{
+  "kii": {
+    "version": "20160301",
+    "produced": 1458699570000,
+    "point": {
+      "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+        [ { "time":"2016-03-23T11:09:18.000+0900", "value":"21" } ],
+      "http://fiap.tanu.org/test/alps/f1/temperature/max":
+        { "time":"2016-03-23T11:09:18.000+0900", "value":"31" },
+      "http://fiap.tanu.org/test/alps/f1/temperature/min":
+        { "time":"2016-03-23T11:09:18.000+0900", "value":"11" }
+    }
+  }
+},
+{
+  "kii": {
+    "version": "20160301",
+    "produced": 1458698970000,
+    "point": {
+      "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+        { "time":"2016-03-23T10:59:18.000+0900", "value":"20" },
+      "http://fiap.tanu.org/test/alps/f1/temperature/max":
+        { "time":"2016-03-23T10:59:18.000+0900", "value":"30" },
+      "http://fiap.tanu.org/test/alps/f1/temperature/min":
+        { "time":"2016-03-23T10:59:18.000+0900", "value":"10" }
+    }
+  }
+},
+{
+  "kii": {
+    "version": "20160301",
+    "produced": 1458700170000,
+    "point": {
+      "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+        { "time":"2016-03-23T11:19:18.000+0900", "value":"22" },
+      "http://fiap.tanu.org/test/alps/f1/temperature/max":
+        { "time":"2016-03-23T11:19:18.000+0900", "value":"32" },
+      "http://fiap.tanu.org/test/alps/f1/temperature/min":
+        { "time":"2016-03-23T11:19:18.000+0900", "value":"12" }
+    }
+  }
+}
+]
+}

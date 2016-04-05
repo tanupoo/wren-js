@@ -1,0 +1,16 @@
+{
+  "fiap": {
+    "version": "20140401",
+    "queryRS": {
+      "status": "200 OK",
+      "point": {
+        "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+          [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
+        "http://fiap.tanu.org/test/alps/f1/temperature/max":
+          { "time":"2016-03-23T10:59:18.000+0900", "value":"20" },
+        "http://fiap.tanu.org/test/alps/f1/temperature/min":
+          { "time":"2016-03-23T10:59:18.000+0900", "value":"20" }
+      }
+    }
+  }
+}

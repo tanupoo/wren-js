@@ -1,0 +1,116 @@
+{
+  "queryDescription": "",
+  "results":
+[
+    {
+      "kii": {
+        "produced": 1459152000000,
+        "version": "20160323",
+        "point": {
+          "http://fiap.tanu.org/test/temperature": {
+            "value": "17",
+            "time": "2016-03-28T17:00:00.000+0900"
+          },
+          "http://fiap.tanu.org/test/humidity": {
+            "value": "56",
+            "time": "2016-03-28T17:00:00.000+0900"
+          }
+        }
+      },
+      "_dataType": "mydata",
+      "_version": "1",
+      "_owner": "th.727f20b00022-16d9-5e11-570e-05a0607b",
+      "_modified": 1459152000460,
+      "_created": 1459152000460,
+      "_id": "121cb0c0-f4bb-11e5-b275-22000a7f900d"
+    },
+    {
+      "kii": {
+        "produced": 1459152600000,
+        "version": "20160323",
+        "point": {
+          "http://fiap.tanu.org/test/temperature": {
+            "value": "19",
+            "time": "2016-03-28T17:10:00.000+0900"
+          },
+          "http://fiap.tanu.org/test/humidity": {
+            "value": "67",
+            "time": "2016-03-28T17:10:00.000+0900"
+          }
+        }
+      },
+      "_dataType": "mydata",
+      "_version": "1",
+      "_owner": "th.727f20b00022-16d9-5e11-570e-05a0607b",
+      "_modified": 1459152600833,
+      "_created": 1459152600833,
+      "_id": "77f65710-f4bc-11e5-a69f-22000b02f3b7"
+    },
+    {
+      "kii": {
+        "produced": 1459153200000,
+        "version": "20160323",
+        "point": {
+          "http://fiap.tanu.org/test/temperature": {
+            "value": "21",
+            "time": "2016-03-28T17:20:00.000+0900"
+          },
+          "http://fiap.tanu.org/test/humidity": {
+            "value": "47",
+            "time": "2016-03-28T17:20:00.000+0900"
+          }
+        }
+      },
+      "_dataType": "mydata",
+      "_version": "1",
+      "_owner": "th.727f20b00022-16d9-5e11-570e-05a0607b",
+      "_modified": 1459153200652,
+      "_created": 1459153200652,
+      "_id": "dd7b74c0-f4bd-11e5-9e43-22000aad0899"
+    },
+    {
+      "kii": {
+        "produced": 1459153800000,
+        "version": "20160323",
+        "point": {
+          "http://fiap.tanu.org/test/temperature": {
+            "value": "23",
+            "time": "2016-03-28T17:30:00.000+0900"
+          },
+          "http://fiap.tanu.org/test/humidity": {
+            "value": "58",
+            "time": "2016-03-28T17:30:00.000+0900"
+          }
+        }
+      },
+      "_dataType": "mydata",
+      "_version": "1",
+      "_owner": "th.727f20b00022-16d9-5e11-570e-05a0607b",
+      "_modified": 1459153800480,
+      "_created": 1459153800480,
+      "_id": "4301f200-f4bf-11e5-81d8-22000b02f727"
+    },
+    {
+      "kii": {
+        "produced": 1459154400000,
+        "version": "20160323",
+        "point": {
+          "http://fiap.tanu.org/test/temperature": {
+            "value": "25",
+            "time": "2016-03-28T17:40:00.000+0900"
+          },
+          "http://fiap.tanu.org/test/humidity": {
+            "value": "69",
+            "time": "2016-03-28T17:40:00.000+0900"
+          }
+        }
+      },
+      "_dataType": "mydata",
+      "_version": "1",
+      "_owner": "th.727f20b00022-16d9-5e11-570e-05a0607b",
+      "_modified": 1459154400798,
+      "_created": 1459154400798,
+      "_id": "a8d333e0-f4c0-11e5-8558-22000aaf0c30"
+    }
+]
+}

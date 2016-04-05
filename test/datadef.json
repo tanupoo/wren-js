@@ -1,0 +1,31 @@
+var wrenDataDef = [
+  {
+    key: [
+       "http://fiap.tanu.org/test/alps/f1/temperature/mean",
+       "http://fiap.tanu.org/test/alps/f1/temperature/max",
+       "http://fiap.tanu.org/test/alps/f1/temperature/min" ],
+    label: "Temperature",
+    unit: "(℃)",
+    color: "#00FF00",
+    min: 20,
+    max: 40,
+    ytick: 10,
+  },
+  {
+    key: [ "http://fiap.tanu.org/test/alps/f1/humidity/mean" ],
+    label: "Humidity",
+    unit: "%",
+    color: "#FF00FF",
+    min: 30,
+    max: 60,
+    ytick: 10,
+    yaxis: 2,
+  },
+];
+
+var wrenFlotDef = [
+  {
+    flot: "#flot01",
+    set: [0, 1]
+  },
+];
