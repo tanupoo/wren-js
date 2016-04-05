@@ -35,9 +35,6 @@ function wren_init()
     alert('ERROR: wrenObj must be defined.');
   }
 
-  // once it gets multiple data, it will get one data from next time.
-  wrenObj.firstRetrieve = true;
-
   /* check whether type exists */
   if (typeof(wrenObj.type) == 'undefined') {
     alert('ERROR: wrenObj.type must be defined.');
@@ -54,6 +51,9 @@ function wren_init()
   } else {
     alert('ERROR: wrenObj.type must be defined or be kiwi, fiap, or kii.');
   }
+
+  // once it gets multiple data, it will get one data from next time.
+  wrenObj.firstRetrieve = true;
 
   /* check wrenObj.tz */
   if (typeof(wrenObj.tz) == 'undefined') {
