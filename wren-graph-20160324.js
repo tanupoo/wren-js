@@ -52,9 +52,6 @@ function wren_init()
     console.log('ERROR: wrenObj.type must be either kiwi, fiap, or kii.');
   }
 
-  // once it gets multiple data, it will get one data from next time.
-  wrenObj.firstRetrieve = true;
-
   /* check wrenObj.tz */
   if (typeof(wrenObj.tz) == 'undefined') {
     wrenObj.tz = 0;
@@ -145,6 +142,15 @@ function wren_init()
       lowerCap:"-",
       radius:5
     } };
+}
+
+function dataset_init()
+{
+  /* clear the dataset */
+  for (var i = 0; i < wrenObj.dataDef.length; i++) {
+    _wrenDataSet[i] = [];
+  }
+  wrenObj.firstRetrieve = true;
 }
 
 function tick_x_format(v, axis) {
@@ -311,6 +317,7 @@ function fill_dataset(i)
 function send_query()
 {
   var cb;
+  /* once it gets multiple data, it will get one data from next time. */
   if (wrenObj.firstRetrieve == true)
     cb = cb_server_response_at_once;
   else
@@ -379,6 +386,8 @@ function cb_server_response_at_once(res)
 function ev_click_start()
 {
   clearTimeout(_wrenEvTimeout);
+  if (document.getElementById('inputRefresh').checked == true)
+    dataset_init();
   send_query();
 }
 
@@ -394,12 +403,7 @@ function ev_init()
 }
 
 $(document).ready(function() {
-  for (var i = 0; i < wrenObj.dataDef.length; i++) {
-    _wrenDataSet[i] = [];
-    /*
-     * update the field of the keys in the document if these fields exist.
-     */
-  }
   wren_init();
+  dataset_init();
   ev_init();
 });
