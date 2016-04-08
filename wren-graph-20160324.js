@@ -20,6 +20,23 @@
  * errorbarPointStyle:
  */
 
+function print_log(m, critical)
+{
+  console.log(m);
+  if (critical) {
+    document.getElementById("divConsole").style.color = "#ff0000";
+  } else {
+    document.getElementById("divConsole").style.color = "#000000";
+  }
+  document.getElementById("divConsole").innerHTML = m.bold();
+}
+
+function fatal_error(m)
+{
+  print_log(m, true);
+  throw 'aborted';
+}
+
 /*
  * initialization
  */
@@ -32,7 +49,7 @@ var _wrenEvTimeout = null;
 function wren_init()
 {
   if (typeof(wrenObj) == 'undefined') {
-    console.log('ERROR: wrenObj must be defined.');
+    fatal_error('ERROR: wrenObj.type must be defined.');
   }
 
   /* check whether type exists */
@@ -40,8 +57,7 @@ function wren_init()
     console.log('ERROR: wrenObj.type must be defined.');
   }
 
-  /* check type and set query function */
-  // XXX here, should call init function according to the type.
+  /* check type and set query attributes */
   if (wrenObj.type == 'kiwi') {
     kiwi_init(wrenObj);
   } else if (wrenObj.type == 'fiap') {
@@ -51,6 +67,9 @@ function wren_init()
   } else {
     console.log('ERROR: wrenObj.type must be either kiwi, fiap, or kii.');
   }
+
+  /* initialize the latest time for query */
+  wrenObj.queryTime = 0;
 
   /* check wrenObj.tz */
   if (typeof(wrenObj.tz) == 'undefined') {
@@ -73,7 +92,6 @@ function wren_init()
    */
   if (wrenObj.xrange >= 889032704) {
     /* 2 months */
-    //wrenObj.xtickFormat = "%Y/%m/%d";
     wrenObj.xtickFormat = "%m/%d";
     wrenObj.xtickSize = [ 15, "day" ];
   } else if (wrenObj.xrange >= 216000000) {
@@ -117,7 +135,7 @@ function wren_init()
     },
     bars: {
       align: "center",
-      fillColor: { colors: [{ opacity: 1 }, { opacity: 1}] },
+      fillColor: { colors: [{ opacity: 0.4 }, { opacity: 0.4 }] },
       barWidth: 500,
       lineWidth: 1
     }
@@ -316,14 +334,25 @@ function fill_dataset(i)
  */
 function send_query()
 {
-  var cb;
   /* once it gets multiple data, it will get one data from next time. */
   if (wrenObj.firstRetrieve == true)
-    cb = cb_server_response_at_once;
+    wrenObj.query.cb_query_success = cb_server_response_at_once;
   else
-    cb = cb_server_response;
+    wrenObj.query.cb_query_success = cb_server_response;
+
   /* call the proper function for query. */
-  wrenObj.query_function(wrenObj, cb, cb_error);
+  var q = wrenObj.query.update_query(wrenObj);
+  $.ajaxSetup({ cache: false });
+  $.ajax({
+    url: q.server_url,
+    type: wrenObj.query.type,
+    headers: wrenObj.query.headers,
+    dataType: wrenObj.query.dataType,
+    scriptCharset: wrenObj.query.scriptCharset,
+    data: q.query_data,
+    success: wrenObj.query.cb_query_success,
+  })
+  .fail(function(xhr, status, err) { cb_query_error(xhr, status, err); });
 }
 
 function set_timeout()
@@ -331,14 +360,20 @@ function set_timeout()
   _wrenEvTimeout = setTimeout(send_query, wrenObj.updateInterval);
 }
 
-function cb_error()
+function cb_query_error(xhr, st, err)
 {
   clearTimeout(_wrenEvTimeout);
-  /*
-   * retry anyway.
-   * XXX it should be done according to the error code from the server.
-   */
-  set_timeout();
+  var m = "[XMLHttpRequest: " + xhr.st + "]" +
+      "[textStatus: " + st + "]" +
+      "[errorThrown : " + err.message + "]";
+  // XXX it should be done according to the error code from the server.
+  if (document.getElementById('inputRetry').checked == true) {
+    print_log(m, true);
+    set_timeout();
+  } else {
+    /* abort */
+    fatal_error(m);
+  }
 }
 
 /*
@@ -349,6 +384,8 @@ function cb_error()
 function cb_server_response(res)
 {
   clearTimeout(_wrenEvTimeout);
+  document.getElementById('divConsole').innerHTML = null;
+  /* parse the response */
   res = wren_obj_serialize(res, wrenObj.tzOffset);
   for (var i = 0; i < wrenObj.dataDef.length; i++) {
     _wrenDataSet[i].pop();  // remove the oldest record.
@@ -366,9 +403,11 @@ function cb_server_response(res)
 function cb_server_response_at_once(res)
 {
   clearTimeout(_wrenEvTimeout);
+  document.getElementById('divConsole').innerHTML = null;
   if (wrenObj.firstRetrieve == true) {
     wrenObj.firstRetrieve = false;
   }
+  /* parse the response */
   res = wren_obj_serialize(res, wrenObj.tzOffset);
   for (var i = 0; i < wrenObj.dataDef.length; i++) {
     wren_update_dataset(res, i);
@@ -386,8 +425,9 @@ function cb_server_response_at_once(res)
 function ev_click_start()
 {
   clearTimeout(_wrenEvTimeout);
-  if (document.getElementById('inputRefresh').checked == true)
+  if (document.getElementById('inputRefresh').checked == true) {
     dataset_init();
+  }
   send_query();
 }
 
