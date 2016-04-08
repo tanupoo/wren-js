@@ -14,21 +14,25 @@
 function kiwi_init(obj)
 {
   /* check required attributes */
-  if (!obj.hasOwnProperty('kiwi')) {
-    console.log("ERROR: wrenObj.kiwi is not defined.");
-  }
-  /* set query_function */
-  obj.query_function = kiwi_send_query;
-  /* set baseURI */
-  if (obj.kiwi.hasOwnProperty('serverURL') || obj.kiwi.serverURL) {
-    obj.baseURI = obj.kiwi.serverURL;
-    if (obj.baseURI[obj.baseURI.length - 1] != '/') {
-      obj.baseURI += "/";
+  if (!obj.hasOwnProperty('query'))
+      obj.query = {}
+
+  /* set query attributes */
+  if (obj.query.hasOwnProperty('serverURL') || obj.query.serverURL) {
+    obj.query.baseURI = obj.query.serverURL;
+    if (obj.query.baseURI[obj.query.baseURI.length - 1] != '/') {
+      obj.query.baseURI += "/";
     }
-    obj.baseURI += "?";
+    obj.query.baseURI += "?";
   } else {
-    obj.baseURI = "/?";
+    obj.query.baseURI = "/?";
   }
+  obj.query.type = 'GET';
+  obj.query.scriptCharset = 'utf-8';
+  obj.query.dataType = '';
+  obj.query.headers = {};
+  obj.query.update_query = kiwi_update_query;
+  obj.query.cb_query_error = cb_query_error;
 }
 
 /*
@@ -50,24 +54,7 @@ function kiwi_update_query(obj)
       server_url += "k=" + obj.dataDef[i].key;
     }
   }
-  return { 'server_url': obj.baseURI + server_url, 'query_data': "" };
-}
-
-/*
- * sending a query to the kiwi server.
- * @param obj wrenObj
- * @param cb callback if succeeded.
- * @param cb_error callback if failed.
- */
-function kiwi_send_query(obj, cb, cb_error)
-{
-  s = kiwi_update_query(obj);
-  $.ajaxSetup({ cache: false });
-  $.ajax({
-    url: s.server_url,
-    success: cb,
-    error: cb_error
-  });
+  return { 'server_url': obj.query.baseURI + server_url, 'query_data': "" };
 }
 
 /*****
@@ -81,47 +68,26 @@ function kiwi_send_query(obj, cb, cb_error)
 function fiap_init(obj)
 {
   /* check required attributes */
-  if (!obj.hasOwnProperty('fiap')) {
-    console.log("ERROR: wrenObj.fiap is not defined.");
-  }
-  /* set query_function */
-  obj.query_function = fiap_send_query;
-  /* set baseURI */
-  if (!obj.fiap.hasOwnProperty('serverURL') || obj.fiap.serverURL) {
-    obj.baseURI = obj.fiap.serverURL;
-    if (obj.fiap.serverURL[obj.fiap.serverURL.length - 1] != '/') {
-      obj.baseURI += "/";
-    }
-    obj.baseURI += "?";
-  } else {
-    obj.baseURI = "/?";
-  }
-}
+  if (!obj.hasOwnProperty('query'))
+      obj.query = {}
 
-/*
- * sending a query to the fiap server with JSON binding.
- * @param obj wrenObj
- * @param cb callback if succeeded.
- * @param cb_error callback if failed.
- */
-function fiap_send_query(obj, cb, cb_error)
-{
-  console.log("FATAL: fiap_send_query() is not supported yet.");
-  //s = update_query_fiap(obj);
-  $.ajaxSetup({ cache: false });
-  $.ajax({
-    url: s.server_url,
-    type: 'POST',
-    headers: {
-      'X-HTTP-Method-Override': 'POST',
+  /* set query attributes */
+  if (!obj.query.hasOwnProperty('serverURL') || obj.query.serverURL) {
+    obj.query.baseURI = obj.query.serverURL;
+    if (obj.query.serverURL[obj.query.serverURL.length - 1] != '/') {
+      obj.query.baseURI += "/";
+    }
+    obj.query.baseURI += "?";
+  } else {
+    obj.query.baseURI = "/?";
+  }
+  obj.query.type = 'GET';
+  obj.query.scriptCharset = 'utf-8';
+  obj.query.dataType = 'json';
+  obj.query.headers = {
       'Content-Type': 'text/json'
-    },
-    dataType: 'json',
-    scriptCharset: 'utf-8',
-    data: s.query_data,
-    success: cb,
-    error: cb_error
-  });
+  };
+  obj.query.update_query = fiap_update_query;
 }
 
 /*****
@@ -135,21 +101,31 @@ function fiap_send_query(obj, cb, cb_error)
 function kii_init(obj)
 {
   /* check required attributes */
-  if (!obj.hasOwnProperty('kii')) {
-    console.log("ERROR: wrenObj.kii is not defined.");
+  if (!obj.hasOwnProperty('query')) {
+    console.log("ERROR: wrenObj.query is not defined.");
   }
   var attr = ['serverURL', 'app_id', 'app_key', 'thing_id', 'thing_token',
       'bucket_id'];
   for (var i; i < attr.length; i++) {
-    if (!obj.kii.hasOwnProperty(attr[i]) || !obj.kii[attr[i]]) {
-      console.log("ERROR: wrenObj.kii.%s is not defined, or null.", attr[i]);
+    if (!obj.query.hasOwnProperty(attr[i]) || !obj.query[attr[i]]) {
+      console.log("ERROR: wrenObj.query.%s is not defined, or null.", attr[i]);
     }
   }
-  /* set query_function */
-  obj.query_function = kii_send_query;
-  /* set baseURI */
-  obj.baseURI = obj.kii.serverURL + "/" + obj.kii.app_id + "/things/" +
-      obj.kii.thing_id + "/buckets/" + obj.kii.bucket_id + "/query";
+  /* set query attributes */
+  obj.query.baseURI = obj.query.serverURL + "/" + obj.query.app_id +
+    "/things/" + obj.query.thing_id + "/buckets/" + obj.query.bucket_id +
+    "/query";
+  obj.query.type = 'POST';
+  obj.query.scriptCharset = 'utf-8';
+  obj.query.dataType = 'json';
+  obj.query.headers = {
+    'X-HTTP-Method-Override': 'POST',
+    'Content-Type': 'application/vnd.kii.QueryRequest+json',
+    'X-Kii-AppID': obj.query.app_id,
+    'X-Kii-AppKey': obj.query.app_key,
+    'Authorization': 'Bearer ' + obj.query.thing_token,
+  };
+  obj.query.update_query = kii_update_query;
 }
 
 /*
@@ -160,57 +136,36 @@ function kii_init(obj)
 function kii_update_query(obj)
 {
   var date = new Date();
-  var unixtime = date.getTime();
+  /* query time */
+  var qtime;
+  if (obj.queryTime)
+    qtime = obj.queryTime;
+  else
+    qtime = date.getTime();
+  /* query time range */
   var delta;
   if (obj.firstRetrieve == true) {
     delta = obj.xrange;
   } else {
     delta = obj.updateInterval * 2;
   }
+  /* create a query data */
   var query_data = {
     "bucketQuery": {
       "clause": {
         "type": "range",
         "field": "kii.produced",
-        "lowerLimit": unixtime - delta,
+        "lowerLimit": qtime - delta,
         "lowerIncluded": true,
-        "upperLimit": unixtime,
+        "upperLimit": qtime,
         "upperIncluded": true
       }
     }
   };
-  if (obj.kii.hasOwnProperty('limit')) {
-    query_data["bestEffortLimit"] = obj.kii.limit;
+  if (obj.query.hasOwnProperty('limit')) {
+    query_data["bestEffortLimit"] = obj.query.limit;
   }
 
-  return { 'server_url': obj.baseURI, 'query_data': JSON.stringify(query_data) };
+  return { 'server_url': obj.query.baseURI,
+    'query_data': JSON.stringify(query_data) };
 }
-
-/*
- * sending a query to the KiiCloud.
- * @param obj wrenObj
- * @param cb callback if succeeded.
- * @param cb_error callback if failed.
- */
-function kii_send_query(obj, cb, cb_error)
-{
-  s = kii_update_query(obj);
-  $.ajaxSetup({ cache: false });
-  $.ajax({
-    url: s.server_url,
-    type: 'POST',
-    headers: {
-      'X-HTTP-Method-Override': 'POST',
-      'Content-Type': 'application/vnd.kii.QueryRequest+json',
-      'X-Kii-AppID': obj.kii.app_id,
-      'X-Kii-AppKey': obj.kii.app_key,
-      'Authorization': 'Bearer ' + obj.kii.thing_token,
-    },
-    dataType: 'json',
-    scriptCharset: 'utf-8',
-    data: s.query_data,
-    success: cb,
-    error: cb_error
-  });
-}
-
