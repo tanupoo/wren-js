@@ -3,7 +3,9 @@ wren-js
 
 ## TODO
 
-## wrenObj definition
+- timezone conversion
+
+## Definition of the attributes in the wrenObj object.
 
     ~~~~
     type: (string, required)
@@ -11,22 +13,30 @@ wren-js
         server object type.
         either 'kiwi', 'fiap', or 'kii'
     
-    kiwi, fiap: (object, required if type is kiwi or fiap)
+    query: (object, conditionally option)
     
-      serverURL: (string, optional)
-        e.g. 'http://localhost:18880'
+      If you use kii type, query is required and the following attributes
+      have to be defined.
     
-    kii: (object, required if type is kii)
+        app_id: (string, required)
+        app_key: (string, required)
+        thing_token: (string, required)
+        thing_id: (string, required)
+        bucket_id: (string, required)
+        serverURL: (string, required)
     
-      app_id: (string, required)
-      app_key: (string, required)
-      thing_token: (string, required)
-      thing_id: (string, required)
-      bucket_id: (string, required)
-      serverURL: (string, required)
-        e.g. 'https://api-jp.kii.com/api/apps' for KiiCloud Japan.
-      limit: (integer, optional)
-        bestEffortLimit
+            e.g. 'https://api-jp.kii.com/api/apps' for KiiCloud Japan.
+    
+        limit: (integer, optional)
+    
+          the value is used for bestEffortLimit.
+    
+      If you use either kiwi or fiap, query object is option.
+      The following attributes can be defined.
+    
+        serverURL: (string, optional)
+    
+          e.g. 'http://localhost:18880'
     
     dataDef: (object, required)
     
@@ -47,7 +57,12 @@ wren-js
     
         time difference from GMT of the server objects in hours.
         default is 0.
-        e.g. tz: 9
+        e.g. tz: 9    (Asia/Tokyo)
+             tz: -3.5 (Canada/Newfoundland)
+             tz: 5.75 (Asia/Katmandu)
+
+        TIPS: KiiCloud keeps data in UTC.  You should define the time
+              difference of your timezone here if you use KiiCloud.
     
     updateInterval: (integer, optional)
     
