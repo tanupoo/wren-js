@@ -1,0 +1,107 @@
+#divBasePanel
+{
+  width: 99%; margin: auto;
+  background: #fbfbfb;
+  padding: 5px;
+  border-radius: 5px;
+  border-width: 3px;
+  border-style: groove;
+}
+
+/* panels are placed in left-to-right order. */
+.classColumnPanel
+{
+  display: flex;
+  display: -moz-flex;
+  display: -o-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  flex-direction: row;
+  -moz-flex-direction: row;
+  -o-flex-direction: row;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+}
+
+/* panels are placed in top-to-down order. */
+.classRowPanel
+{
+  display: flex;
+  display: -moz-flex;
+  display: -o-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  flex-direction: column;
+  -moz-flex-direction: column;
+  -o-flex-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+}
+
+.classLeftAlignedPanel
+{
+  text-align: left;
+  width: 70%; margin: 10px auto;
+}
+
+.classFlotPanel
+{
+  width: 600px; height: 170px; margin: 10px auto;
+  border-radius: 10px;
+  border-width: 3px;
+  border-style: groove;
+  box-shadow: 5px 7px 10px #828282;
+  text-align: center; margin: 10px auto;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.classFlotBox
+{
+  width: 90%; height: 90%; margin: auto;
+}
+
+.classInputPanel
+{
+  width: 600px; height: 90%; margin: auto;
+  border-radius: 10px;
+  border-width: 3px;
+  border-style: groove;
+  box-shadow: 5px 7px 10px #828282;
+  text-align: center; margin: 10px auto;
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+  line-height: 170%;
+}
+
+.classButton
+{
+  padding: 5px;
+}
+
+#divTitlePanel
+{
+  width: 80%; margin: 10px auto;
+}
+
+#TopTitle
+{
+  margin: 5px auto;
+  font-family: Helvetica, sans-serif;
+  font-size: 25px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #111111;
+}
+
+#divConsole
+{
+  width: 99%; height: 15px; margin: auto;
+  padding: 5px;
+  border-radius: 5px;
+  border-width: 3px;
+  border-style: groove;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+}
+
