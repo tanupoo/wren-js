@@ -1,7 +1,8 @@
 #divBasePanel
 {
   width: 99%; margin: auto;
-  background: #fbfbfb;
+  background: #f6f6f6;
+  /*background: #ffffff;*/
   padding: 5px;
   border-radius: 5px;
   border-width: 3px;
@@ -47,6 +48,7 @@
 .classFlotPanel
 {
   width: 600px; height: 170px; margin: 10px auto;
+  background: #ffffff;
   border-radius: 10px;
   border-width: 3px;
   border-style: groove;
@@ -64,6 +66,7 @@
 .classInputPanel
 {
   width: 600px; height: 90%; margin: auto;
+  background: #ffffff;
   border-radius: 10px;
   border-width: 3px;
   border-style: groove;
