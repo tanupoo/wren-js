@@ -140,9 +140,78 @@ wren-js
 - classInputBox
 - divConsole
 
+## Assumption of the response from the servers.
+
+### kiwi
+
+- Example
+
+    ~~~~
+    {
+      "kiwi": {
+        "version": "20140401",
+        "point": {
+          "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+            [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
+          "http://fiap.tanu.org/test/alps/f1/temperature/max":
+            { "time":"2016-03-23T10:59:18.000+0900", "value":"20" },
+          "http://fiap.tanu.org/test/alps/f1/temperature/min":
+            { "time":"2016-03-23T10:59:18.000+0900", "value":"20" }
+        }
+      }
+    }
+    ~~~~
+
+### IEEE1888
+
+- Example
+
+    ~~~~
+    {
+      "fiap": {
+        "version": "20140401",
+        "queryRS": {
+          "status": "200 OK",
+          "point": {
+            "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+              [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
+            "http://fiap.tanu.org/test/alps/f1/temperature/max":
+              { "time":"2016-03-23T10:59:18.000+0900", "value":"20" },
+            "http://fiap.tanu.org/test/alps/f1/temperature/min":
+              { "time":"2016-03-23T10:59:18.000+0900", "value":"20" }
+          }
+        }
+      }
+    }
+    ~~~~
+
+### KiiCloud
+
+    ~~~~
+    {
+      "queryDescription": "",
+      "results":
+        {
+          "kii": {
+            "version": "20160301",
+            "produced": 1458698970000,
+            "point": {
+              "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+                [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
+              "http://fiap.tanu.org/test/alps/f1/temperature/max":
+                { "time":"2016-03-23T10:59:18.000+0900", "value":"30" },
+              "http://fiap.tanu.org/test/alps/f1/temperature/min":
+                { "time":"2016-03-23T10:59:18.000+0900", "value":"10" }
+            }
+          }
+        }
+    }
+    ~~~~
+
 ## TODO
 
-- timezone conversion
+- tz should be a timezone string.
+- timezone conversion correctly. it seems there might be a bug.
 
 ## test for wren-parse-object.js
 
