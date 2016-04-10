@@ -1,9 +1,62 @@
 wren-js
 =======
 
-## TODO
+## Usage
 
-- timezone conversion
+- include javascripts in your HTML file.
+
+    ~~~~
+    <script type="text/javascript" src="wren/wren-parse-object.js"></script>
+    <script type="text/javascript" src="wren/wren-query.js"></script>
+    <script type="text/javascript" src="wren/wren-graph-20160324.js"></script>
+    <link rel="stylesheet" type="text/css" href="wren/wren-base.css">
+    ~~~~
+
+- include JSON file in your HTML file that defines wrenObj.
+
+    ~~~~
+    <script type="text/javascript" src="kii-cloud-demo-20160321.js"></script>
+    ~~~~
+
+- put some panels for flot in your HTML file.
+
+    ~~~~
+    <div id="flot01" class="classFlotBox"></div>
+    ~~~~
+
+- put the control panel in your HTML file if you need.
+
+    ~~~~
+      <div class="classRowPanel">
+        <div class="classInputPanel">
+          <div class="classInputBox">
+            <button id="btnStart" class="classButton" type="button">Start</button>
+            <button id="btnStop" class="classButton" type="button">Stop</button>
+          </div>
+          <div class="classLeftAlignedPanel">
+            <div class="classInputBox">
+              Date and Time :
+              <input id="inputDateTime" type="text" size="42" value="current" readon
+    ly>     
+            </div>
+            <div class="classInputBox">
+              <input id="inputRefresh" type="checkbox" value="refresh">
+              Refresh the lines when clicking the start button.
+            </div>
+            <div class="classInputBox">
+              <input id="inputRetry" type="checkbox" value="retry" checked>
+              Retry anyway even if something network error happens.
+            </div>
+          </div>
+        </div>
+      </div>
+    ~~~~
+
+- put the console for showing information in your HTML file.
+
+    ~~~~
+    <div id="divConsole" class="classRowPanel"> </div>
+    ~~~~
 
 ## Definition of the attributes in the wrenObj object.
 
@@ -74,6 +127,22 @@ wren-js
         the range of the x-axis in milliseconds.
         default is 172800000 (2 days).
     ~~~~
+
+## wren-base.css
+
+- divBasePanel
+- classColumnPanel
+- classRowPanel
+- classFlotPanel
+- classFlotBox
+- classInputPanel
+- classLeftAlignedPanel
+- classInputBox
+- divConsole
+
+## TODO
+
+- timezone conversion
 
 ## test for wren-parse-object.js
 
