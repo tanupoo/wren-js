@@ -210,6 +210,7 @@ wren-js
 
 ## TODO
 
+- a serialize function should be done in each protocol function.
 - tz should be a timezone string.
 - timezone conversion correctly. it seems there might be a bug.
 
