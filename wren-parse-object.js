@@ -18,6 +18,15 @@ console.log(pset[target]);
 // end of debug code
 */
 
+
+/*
+ * with calling a sub function, it serializes the data passed by a server.
+ * the sub function produces a new object for the serialization.
+ * at the end, it calls the sub function to canonicalize the new object.
+ * @param obj a data passed by a server.
+ * @param tz timezone offset in milliseconds.
+ * @return a set of points in json if succeeded, otherwise return undefinde.
+ */
 /*
  * convert the time into a milliseconds number.
  * convert the value into a float number.
@@ -118,44 +127,4 @@ function wren_kii_obj_serialize(obj)
 //console.log(dst);
 //console.log('=== end serialize kii ===');
   return dst;
-}
-
-/*
- * with calling a sub function, it serializes the data passed by a server.
- * the sub function produces a new object for the serialization.
- * at the end, it calls the sub function to canonicalize the new object.
- * @param obj a data passed by a server.
- * @param tz timezone offset in milliseconds.
- * @return a set of points in json if succeeded, otherwise return undefinde.
- */
-function wren_obj_serialize(obj, tz)
-{
-  var pset;
-  if (obj.hasOwnProperty('kiwi')) {
-    if (!obj.kiwi.hasOwnProperty('point')) {
-      console.log('ERROR: there is no suitable point object in kiwi object.');
-      return undefined;
-    }
-    pset = wren_fiap_obj_serialize(obj.kiwi.point);
-  } else if (obj.hasOwnProperty('fiap')) {
-    if (!obj.fiap.hasOwnProperty('queryRS') ||
-        !obj.fiap.queryRS.hasOwnProperty('point')) {
-      console.log('ERROR: there is no suitable point object in fiap object.');
-      return undefined;
-    }
-    pset = wren_fiap_obj_serialize(obj.fiap.queryRS.point);
-  } else if (obj.hasOwnProperty('queryDescription') && obj.hasOwnProperty('results')) {
-    if (obj.results.hasOwnProperty('kii') ||
-      (obj.results.length && obj.results[0].hasOwnProperty('kii'))) {
-      pset = wren_kii_obj_serialize(obj.results);
-      if (!pset) {
-        console.log('ERROR: there is no suitable point object in kii object.');
-        return undefined;
-      }
-    }
-  } else {
-    console.log('ERROR: unsupported object.');
-    return undefined;
-  }
-  return wren_obj_canonicalize(pset, tz);
 }

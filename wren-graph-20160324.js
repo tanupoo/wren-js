@@ -68,9 +68,6 @@ function wren_init()
     console.log('ERROR: wrenObj.type must be either kiwi, fiap, or kii.');
   }
 
-  /* initialize the latest time for query */
-  wrenObj.queryTime = 0;
-
   /* check wrenObj.tz */
   if (typeof(wrenObj.tz) == 'undefined') {
     wrenObj.tz = 0;
@@ -334,12 +331,6 @@ function fill_dataset(i)
  */
 function send_query()
 {
-  /* once it gets multiple data, it will get one data from next time. */
-  if (wrenObj.firstRetrieve == true)
-    wrenObj.query.cb_query_success = cb_server_response_at_once;
-  else
-    wrenObj.query.cb_query_success = cb_server_response;
-
   /* call the proper function for query. */
   var q = wrenObj.query.update_query(wrenObj);
   $.ajaxSetup({ cache: false });
@@ -350,7 +341,7 @@ function send_query()
     dataType: wrenObj.query.dataType,
     scriptCharset: wrenObj.query.scriptCharset,
     data: q.query_data,
-    success: wrenObj.query.cb_query_success,
+    success: wrenObj.query.cb_recv_response,
   })
   .fail(function(xhr, status, err) { cb_query_error(xhr, status, err); });
 }
@@ -377,16 +368,33 @@ function cb_query_error(xhr, st, err)
 }
 
 /*
+ * dispatcher of the functions to process the response.
+ */
+function cb_recv_response(res)
+{
+  clearTimeout(_wrenEvTimeout);
+  document.getElementById('divConsole').innerHTML = null;
+  /* once it gets multiple data, it will get one data from next time. */
+  if (wrenObj.firstRetrieve == true) {
+    wrenObj.firstRetrieve = false;
+    parse_response_at_once(res);
+  }
+  else {
+    parse_response(res);
+  }
+  // XXX should it be done here ?
+  query_clear_state(wrenObj);
+}
+
+/*
  * it deals with one record.
  * callback function to parse the response.
  * update the data set and canvas.
  */
-function cb_server_response(res)
+function parse_response(res)
 {
-  clearTimeout(_wrenEvTimeout);
-  document.getElementById('divConsole').innerHTML = null;
   /* parse the response */
-  res = wren_obj_serialize(res, wrenObj.tzOffset);
+  res = wren_obj_canonicalize(res, wrenObj.tzOffset);
   for (var i = 0; i < wrenObj.dataDef.length; i++) {
     _wrenDataSet[i].pop();  // remove the oldest record.
     wren_update_dataset(res, i);
@@ -400,15 +408,10 @@ function cb_server_response(res)
  * callback function to parse the response at once.
  * update the data set and canvas.
  */
-function cb_server_response_at_once(res)
+function parse_response_at_once(res)
 {
-  clearTimeout(_wrenEvTimeout);
-  document.getElementById('divConsole').innerHTML = null;
-  if (wrenObj.firstRetrieve == true) {
-    wrenObj.firstRetrieve = false;
-  }
   /* parse the response */
-  res = wren_obj_serialize(res, wrenObj.tzOffset);
+  res = wren_obj_canonicalize(res, wrenObj.tzOffset);
   for (var i = 0; i < wrenObj.dataDef.length; i++) {
     wren_update_dataset(res, i);
     fill_dataset(i);
