@@ -105,6 +105,10 @@
   width: 80%;
   height: 100px;
   margin: 10px auto;
+  border-radius: 10px;
+  border-width: 3px;
+  border-style: groove;
+  box-shadow: 5px 7px 10px #828282;
   font-size: 50px;
   text-align: center;
   text-shadow: 1px 1px 1px #111111;
