@@ -93,7 +93,7 @@ function kiwi_cb_recv_response(res)
   }
   var pset = wren_fiap_obj_serialize(res.kiwi.point);
   if (!pset) {
-    console.log('ERROR: serialization of the kiwi object failed.');
+    console.log('ERROR: serialization of the kiwi (fiap) object failed.');
     return;
   }
   cb_recv_response(pset);
