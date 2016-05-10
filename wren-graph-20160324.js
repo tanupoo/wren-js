@@ -333,10 +333,10 @@ function send_query()
 {
   /* call the proper function for query. */
   var q = wrenObj.query.update_query(wrenObj);
-  $.ajaxSetup({ cache: false });
   $.ajax({
     url: q.server_url,
     type: wrenObj.query.type,
+    cache: false,
     headers: wrenObj.query.headers,
     dataType: wrenObj.query.dataType,
     scriptCharset: wrenObj.query.scriptCharset,
@@ -439,10 +439,19 @@ function ev_click_stop()
   clearTimeout(_wrenEvTimeout);
 }
 
+/* this function may be overrided. */
+function ev_init_local()
+{
+  /* dummy */
+}
+
 function ev_init()
 {
   document.getElementById('btnStop').addEventListener('click', ev_click_stop, false);
   document.getElementById('btnStart').addEventListener('click', ev_click_start, false);
+
+  /* it's for localization */
+  ev_init_local()
 }
 
 $(document).ready(function() {
