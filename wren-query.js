@@ -93,7 +93,7 @@ function kiwi_cb_recv_response(res)
   }
   var pset = wren_fiap_obj_serialize(res.kiwi.point);
   if (!pset) {
-    console.log('ERROR: there is no suitable point object in kii object.');
+    console.log('ERROR: there is no suitable point object in kiwi object.');
     return;
   }
   cb_recv_response(pset);
