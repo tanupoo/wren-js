@@ -93,7 +93,7 @@ function kiwi_cb_recv_response(res)
   }
   var pset = wren_fiap_obj_serialize(res.kiwi.point);
   if (!pset) {
-    console.log('ERROR: there is no suitable point object in kiwi object.');
+    console.log('ERROR: serialization of the kiwi object failed.');
     return;
   }
   cb_recv_response(pset);
@@ -142,7 +142,7 @@ function fiap_cb_recv_response(res)
   }
   var pset = wren_fiap_obj_serialize(obj.fiap.queryRS.point);
   if (!pset) {
-    console.log('ERROR: there is no suitable point object in kii object.');
+    console.log('ERROR: serialization of the fiap object failed.');
     return;
   }
   // XXX needs to add more process, e.g. cursor.
@@ -217,7 +217,7 @@ function kii_cb_recv_response(res)
   /* finish to fetch the response */
   var pset = wren_kii_obj_serialize(wrenObj.query.result);
   if (!pset) {
-    console.log('ERROR: there is no suitable point object in kii object.');
+    console.log('ERROR: serialization of the kii object failed.');
     return;
   }
   cb_recv_response(pset);
