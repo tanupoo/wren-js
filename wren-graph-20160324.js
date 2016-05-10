@@ -22,7 +22,6 @@
 
 function print_log(m, critical)
 {
-  console.log(m);
   if (critical) {
     document.getElementById("divConsole").style.color = "#ff0000";
   } else {
