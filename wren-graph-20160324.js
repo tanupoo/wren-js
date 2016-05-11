@@ -353,10 +353,21 @@ function set_timeout()
 function cb_query_error(xhr, st, err)
 {
   clearTimeout(_wrenEvTimeout);
-  var m = "[XMLHttpRequest: " + xhr.st + "]" +
-      "[textStatus: " + st + "]" +
-      "[errorThrown : " + err.message + "]";
   // XXX it should be done according to the error code from the server.
+  var m = "ERROR:";
+  console.log('DEBUG: query_error: xhr [', xhr, ']')
+  console.log('DEBUG: query_error: st  [', st, ']')
+  console.log('DEBUG: query_error: err [', err, ']')
+  if (/failed to connect/i.test(err)) {
+    m += "connection failed to the server.";
+  } else {
+    //if (xhr.responseText)
+    //  m += "[XMLHttpRequest: " + xhr.responseText + "]";
+    if (st)
+      m += "[textStatus: " + st + "]";
+    if (err.message)
+        "[errorThrown: " + err.message + "]";
+  }
   if (document.getElementById('inputRetry').checked == true) {
     print_log(m, true);
     set_timeout();
