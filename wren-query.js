@@ -45,14 +45,16 @@ function kiwi_init(obj)
   query_init_common(obj);
 
   /* set query attributes */
-  if (obj.query.hasOwnProperty('serverURL') || obj.query.serverURL) {
-    obj.query.baseURI = obj.query.serverURL;
-    if (obj.query.baseURI[obj.query.baseURI.length - 1] != '/') {
-      obj.query.baseURI += "/";
+  if (!obj.query.hasOwnProperty('serverQueryURL')) {
+    if (obj.query.hasOwnProperty('serverURL') || obj.query.serverURL) {
+      obj.query.baseURI = obj.query.serverURL;
+      if (obj.query.baseURI[obj.query.baseURI.length - 1] != '/') {
+        obj.query.baseURI += "/";
+      }
+      obj.query.baseURI += "?";
+    } else {
+      obj.query.baseURI = "/?";
     }
-    obj.query.baseURI += "?";
-  } else {
-    obj.query.baseURI = "/?";
   }
   obj.query.type = 'GET';
   obj.query.scriptCharset = 'utf-8';
@@ -69,23 +71,28 @@ function kiwi_init(obj)
  */
 function kiwi_update_query(obj)
 {
-  var server_url = "";
-  for (var i = 0; i < obj.dataDef.length; i++) {
-    if (obj.dataDef[i].key.length) {
-      for (var j = 0; j < obj.dataDef[i].key.length; j++) {
+  if (!obj.query.hasOwnProperty('serverQueryURL')) {
+    var server_url = "";
+    for (var i = 0; i < obj.dataDef.length; i++) {
+      if (obj.dataDef[i].key.length) {
+        for (var j = 0; j < obj.dataDef[i].key.length; j++) {
+          server_url += server_url ? "&" : "";
+          server_url += "k=" + obj.dataDef[i].key[j];
+        }
+      } else {
         server_url += server_url ? "&" : "";
-        server_url += "k=" + obj.dataDef[i].key[j];
+        server_url += "k=" + obj.dataDef[i].key;
       }
-    } else {
-      server_url += server_url ? "&" : "";
-      server_url += "k=" + obj.dataDef[i].key;
     }
+    return { 'server_url': obj.query.baseURI + server_url, 'query_data': "" };
+  } else {
+    return { 'server_url': obj.query.serverQueryURL, 'query_data': "" };
   }
-  return { 'server_url': obj.query.baseURI + server_url, 'query_data': "" };
 }
 
 function kiwi_cb_recv_response(res)
 {
+  console.log(res)
   if (!res.hasOwnProperty('kiwi') ||
       !res.kiwi.hasOwnProperty('point')) {
     console.log('ERROR: there is no suitable point object in kiwi object.');

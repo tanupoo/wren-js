@@ -1,32 +1,27 @@
 wren-js
 =======
 
+This is a tool set to draw a graph in a browser.
+
 ## Usage
 
 - include javascripts in your HTML file.
 
-    ~~~~
     <script type="text/javascript" src="wren/wren-parse-object.js"></script>
     <script type="text/javascript" src="wren/wren-query.js"></script>
     <script type="text/javascript" src="wren/wren-graph-20160324.js"></script>
     <link rel="stylesheet" type="text/css" href="wren/wren-base.css">
-    ~~~~
 
 - include JSON file in your HTML file that defines wrenObj.
 
-    ~~~~
     <script type="text/javascript" src="kii-cloud-demo-20160321.js"></script>
-    ~~~~
 
 - put some panels for flot in your HTML file.
 
-    ~~~~
     <div id="flot01" class="classFlotBox"></div>
-    ~~~~
 
 - put the control panel in your HTML file if you need.
 
-    ~~~~
       <div class="classRowPanel">
         <div class="classInputPanel">
           <div class="classInputBox">
@@ -50,17 +45,13 @@ wren-js
           </div>
         </div>
       </div>
-    ~~~~
 
 - put the console for showing information in your HTML file.
 
-    ~~~~
     <div id="divConsole" class="classRowPanel"> </div>
-    ~~~~
 
 ## Definition of the attributes in the wrenObj object.
 
-    ~~~~
     type: (string, required)
     
         server object type.
@@ -113,7 +104,7 @@ wren-js
         e.g. tz: 9    (Asia/Tokyo)
              tz: -3.5 (Canada/Newfoundland)
              tz: 5.75 (Asia/Katmandu)
-
+    
         TIPS: KiiCloud keeps data in UTC.  You should define the time
               difference of your timezone here if you use KiiCloud.
     
@@ -126,7 +117,6 @@ wren-js
     
         the range of the x-axis in milliseconds.
         default is 172800000 (2 days).
-    ~~~~
 
 ## wren-base.css
 
@@ -146,7 +136,6 @@ wren-js
 
 - Example
 
-    ~~~~
     {
       "kiwi": {
         "version": "20140401",
@@ -160,13 +149,11 @@ wren-js
         }
       }
     }
-    ~~~~
 
 ### IEEE1888
 
 - Example
 
-    ~~~~
     {
       "fiap": {
         "version": "20140401",
@@ -183,11 +170,9 @@ wren-js
         }
       }
     }
-    ~~~~
 
 ### KiiCloud
 
-    ~~~~
     {
       "queryDescription": "",
       "results":
@@ -206,7 +191,6 @@ wren-js
           }
         }
     }
-    ~~~~
 
 ## TODO
 

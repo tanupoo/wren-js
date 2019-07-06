@@ -368,7 +368,7 @@ function cb_query_error(xhr, st, err)
     if (err.message)
         "[errorThrown: " + err.message + "]";
   }
-  if (document.getElementById('inputRetry').checked == true) {
+  if (document.hasOwnProperty('inputRetry') && document.getElementById('inputRetry').checked == true) {
     print_log(m, true);
     set_timeout();
   } else {
@@ -438,7 +438,7 @@ function parse_response_at_once(res)
 function ev_click_start()
 {
   clearTimeout(_wrenEvTimeout);
-  if (document.getElementById('inputRefresh').checked == true) {
+  if (document.hasOwnProperty('inputRefresh') && (document.getElementById('inputRefresh').checked == true)) {
     dataset_init();
   }
   send_query();
@@ -457,8 +457,16 @@ function ev_init_local()
 
 function ev_init()
 {
-  document.getElementById('btnStop').addEventListener('click', ev_click_stop, false);
-  document.getElementById('btnStart').addEventListener('click', ev_click_start, false);
+  if (wrenObj.autostart) {
+    ev_click_start()
+  } else {
+    if (document.hasOwnProperty('btnStop')) {
+      document.getElementById('btnStop').addEventListener('click', ev_click_stop, false);
+    }
+    if (document.hasOwnProperty('btnStart')) {
+      document.getElementById('btnStart').addEventListener('click', ev_click_start, false);
+    }
+  }
 
   /* it's for localization */
   ev_init_local()
