@@ -92,7 +92,6 @@ function kiwi_update_query(obj)
 
 function kiwi_cb_recv_response(res)
 {
-  console.log(res)
   if (!res.hasOwnProperty('kiwi') ||
       !res.kiwi.hasOwnProperty('point')) {
     console.log('ERROR: there is no suitable point object in kiwi object.');
