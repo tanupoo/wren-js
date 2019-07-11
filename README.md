@@ -149,15 +149,15 @@ This is a tool set to draw a graph in a browser.
 ```
 {
     "kiwi": {
-    "version": "20140401",
-    "point": {
-        "http://fiap.tanu.org/test/alps/f1/temperature/mean":
-        [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
-        "http://fiap.tanu.org/test/alps/f1/temperature/max":
-        { "time":"2016-03-23T10:59:18.000+0900", "value":"20" },
-        "http://fiap.tanu.org/test/alps/f1/temperature/min":
-        { "time":"2016-03-23T10:59:18.000+0900", "value":"20" }
-    }
+        "version": "20140401",
+        "point": {
+            "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+                [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
+            "http://fiap.tanu.org/test/alps/f1/temperature/max":
+                { "time":"2016-03-23T10:59:18.000+0900", "value":"20" },
+            "http://fiap.tanu.org/test/alps/f1/temperature/min":
+                { "time":"2016-03-23T10:59:18.000+0900", "value":"20" }
+        }
     }
 }
 ```
@@ -169,18 +169,18 @@ This is a tool set to draw a graph in a browser.
 ```
 {
     "fiap": {
-    "version": "20140401",
-    "queryRS": {
-        "status": "200 OK",
-        "point": {
-        "http://fiap.tanu.org/test/alps/f1/temperature/mean":
-            [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
-        "http://fiap.tanu.org/test/alps/f1/temperature/max":
-            { "time":"2016-03-23T10:59:18.000+0900", "value":"20" },
-        "http://fiap.tanu.org/test/alps/f1/temperature/min":
-            { "time":"2016-03-23T10:59:18.000+0900", "value":"20" }
+        "version": "20140401",
+        "queryRS": {
+            "status": "200 OK",
+            "point": {
+                "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+                    [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
+                "http://fiap.tanu.org/test/alps/f1/temperature/max":
+                    { "time":"2016-03-23T10:59:18.000+0900", "value":"20" },
+                "http://fiap.tanu.org/test/alps/f1/temperature/min":
+                    { "time":"2016-03-23T10:59:18.000+0900", "value":"20" }
+            }
         }
-    }
     }
 }
 ```
@@ -193,16 +193,16 @@ This is a tool set to draw a graph in a browser.
     "results":
     {
         "kii": {
-        "version": "20160301",
-        "produced": 1458698970000,
-        "point": {
-            "http://fiap.tanu.org/test/alps/f1/temperature/mean":
-            [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
-            "http://fiap.tanu.org/test/alps/f1/temperature/max":
-            { "time":"2016-03-23T10:59:18.000+0900", "value":"30" },
-            "http://fiap.tanu.org/test/alps/f1/temperature/min":
-            { "time":"2016-03-23T10:59:18.000+0900", "value":"10" }
-        }
+            "version": "20160301",
+            "produced": 1458698970000,
+            "point": {
+                "http://fiap.tanu.org/test/alps/f1/temperature/mean":
+                    [ { "time":"2016-03-23T10:59:18.000+0900", "value":"20" } ],
+                "http://fiap.tanu.org/test/alps/f1/temperature/max":
+                    { "time":"2016-03-23T10:59:18.000+0900", "value":"30" },
+                "http://fiap.tanu.org/test/alps/f1/temperature/min":
+                    { "time":"2016-03-23T10:59:18.000+0900", "value":"10" }
+            }
         }
     }
 }
