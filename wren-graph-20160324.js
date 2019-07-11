@@ -246,7 +246,6 @@ function update_canvas()
   for (var i = 0; i < wrenObj.flotDef.length; i++) {
     var canvas = wrenObj.flotDef[i].flot;
     var dataset = update_flot_data(wrenObj.flotDef[i].set);
-    //console.log(wrenObj.flotDef[i].flot, dataset.length);
     var opt = get_float_axes(wrenObj.flotDef[i].set);
     $.plot($(canvas), dataset, opt);
   }
@@ -275,11 +274,13 @@ function update_canvas()
 function wren_update_dataset(res, i, remove_head)
 {
   var kvt = [];
-  for (var j = 0; j < wrenObj.dataDef[i].key.length; j++) {
+  for (let j = 0; j < wrenObj.dataDef[i].key.length; j++) {
     kvt[j] = res[wrenObj.dataDef[i].key[j]];
-//console.log('kvt', j, kvt[j]);
   }
-  for (var k = 0; k < kvt[0].length; k++) {
+  if (kvt[0] == undefined) {
+    return;
+  }
+  for (let k = 0; k < kvt[0].length; k++) {
     let d = kvt[0][k];
     if (d[0] == 0) {
       // ignore it if ts is zero.
